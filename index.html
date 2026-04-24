@@ -2,17 +2,47 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Dunkin - Punto Óptimo</title>
+<title>Dunkin - Organización Industrial</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body{font-family:Arial;margin:0;background:#f5f5f5;}
-header{background:#ff6a00;color:white;padding:20px;text-align:center;}
-section{padding:20px;}
-.card{background:white;padding:15px;margin:10px 0;border-radius:10px;}
-.interactive{text-align:center;}
-canvas{max-width:700px;margin:auto;}
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f5f5f5;
+}
+
+header{
+    background:#ff6a00;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+section{
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    margin:15px 0;
+    border-radius:10px;
+}
+
+h2{
+    color:#ff6a00;
+}
+
+.interactive{
+    text-align:center;
+}
+
+canvas{
+    max-width:700px;
+    margin:auto;
+}
 </style>
 </head>
 
@@ -20,18 +50,48 @@ canvas{max-width:700px;margin:auto;}
 
 <header>
 <h1>Dunkin’ Donuts</h1>
-<p>Visualización del Punto Óptimo</p>
+<p>Organización Industrial - Naturaleza y Tamaño de la Empresa</p>
 </header>
 
 <section>
 
 <div class="card">
-<h2>Modelo Económico</h2>
-<p>Equilibrio entre costos de mercado y costos internos.</p>
+<h2>1. Naturaleza de la empresa</h2>
+<p>La empresa existe para reducir los costos de transacción del mercado. Dunkin’ coordina internamente procesos clave como marca, calidad y proveedores, evitando costos de búsqueda, negociación y control.</p>
+</div>
+
+<div class="card">
+<h2>2. Costos de transacción</h2>
+<p>Son los costos de usar el mercado. Dunkin los reduce mediante contratos de franquicia, estandarización y control de proveedores.</p>
+</div>
+
+<div class="card">
+<h2>3. Integración vertical</h2>
+<p>Dunkin presenta una integración parcial: no produce todo internamente, pero controla estándares y procesos clave mediante contratos.</p>
+</div>
+
+<div class="card">
+<h2>4. Tamaño de la empresa</h2>
+<p>La empresa crece hasta que los costos internos se igualan a los costos de mercado. Dunkin logra gran tamaño global gracias a su modelo de franquicias.</p>
+</div>
+
+<div class="card">
+<h2>5. Problema de agencia</h2>
+<p>Existe separación entre dueño y operador (franquiciado). Dunkin lo controla mediante contratos, supervisión y estándares.</p>
+</div>
+
+<div class="card">
+<h2>6. Aplicación: Modelo Dunkin</h2>
+<p>Dunkin utiliza franquicias para equilibrar control y eficiencia, permitiendo expansión rápida con menor inversión directa.</p>
+</div>
+
+<div class="card">
+<h2>7. Punto óptimo</h2>
+<p>El nivel óptimo ocurre cuando los costos de mercado se igualan a los costos internos. Dunkin se posiciona en un modelo híbrido entre mercado e integración.</p>
 </div>
 
 <div class="card interactive">
-<h2>Gráfico Interactivo</h2>
+<h2>8. Visualización Interactiva del Punto Óptimo</h2>
 
 <input type="range" min="0" max="100" value="50" id="slider" oninput="updateChart()">
 
@@ -99,9 +159,15 @@ function updateChart(){
 
     chart.update();
 
-    if(val<35){txt.innerText="Mayor uso del mercado";}
-    else if(val<=70){txt.innerText="Punto óptimo (Dunkin)";}
-    else{txt.innerText="Mayor integración interna";}
+    if(val<35){
+        txt.innerText="Predominio del mercado: menor control.";
+    }
+    else if(val<=70){
+        txt.innerText="Punto óptimo: modelo Dunkin (franquicias).";
+    }
+    else{
+        txt.innerText="Alta integración: mayor control pero más costos.";
+    }
 }
 
 updateChart();
