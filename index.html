@@ -8,9 +8,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
 body{
-    font-family: 'Arial';
+    font-family: Arial;
     margin:0;
     background: linear-gradient(135deg,#ff6a00,#ff0080);
     color:#333;
@@ -20,10 +19,6 @@ header{
     text-align:center;
     padding:40px;
     color:white;
-}
-
-h1{
-    font-size:40px;
 }
 
 section{
@@ -38,23 +33,18 @@ section{
     margin:20px 0;
     border-radius:15px;
     box-shadow:0 8px 20px rgba(0,0,0,0.2);
-    transform: translateY(30px);
     opacity:0;
+    transform:translateY(30px);
     transition: all 0.6s ease;
 }
 
 .card.show{
-    transform: translateY(0);
     opacity:1;
+    transform:translateY(0);
 }
 
-h2{
-    color:#ff6a00;
-}
-
-h3{
-    color:#ff0080;
-}
+h2{color:#ff6a00;}
+h3{color:#ff0080;}
 
 .interactive{
     text-align:center;
@@ -64,7 +54,7 @@ button{
     background:#ff0080;
     color:white;
     border:none;
-    padding:10px 20px;
+    padding:10px 15px;
     border-radius:10px;
     cursor:pointer;
 }
@@ -73,7 +63,6 @@ canvas{
     max-width:700px;
     margin:20px auto;
 }
-
 </style>
 </head>
 
@@ -87,27 +76,35 @@ canvas{
 <section>
 
 <div class="card">
-<h2>🧠 Análisis del Capítulo 2</h2>
+<h2>🧠 Análisis y Resumen del Capítulo 2</h2>
 <p>
-La empresa surge como respuesta a los costos de transacción del mercado. Cuando estos costos son altos, es más eficiente coordinar internamente. Sin embargo, la coordinación también genera costos, por lo que la empresa enfrenta un trade-off constante entre mercado e integración.
+El capítulo 2 de Organización Industrial plantea una pregunta fundamental: ¿por qué existen las empresas si los mercados pueden coordinar intercambios?
+La respuesta se encuentra en los costos de transacción. Utilizar el mercado implica costos de búsqueda, negociación y supervisión.
+Cuando estos son altos, la empresa surge como una alternativa más eficiente.
 </p>
-<button onclick="mostrarMas('teoria')">Ver más</button>
-<p id="teoria" style="display:none;">
-El tamaño de la empresa se define cuando los costos internos se igualan a los del mercado, estableciendo su límite eficiente.
+
+<button onclick="toggle('extra1')">Profundizar</button>
+
+<p id="extra1" style="display:none;">
+Sin embargo, la coordinación interna también genera costos como burocracia y problemas de control. 
+Por ello, la empresa enfrenta un trade-off constante entre mercado e integración.
+El tamaño óptimo se alcanza cuando los costos internos se igualan a los costos del mercado.
 </p>
 </div>
 
 <div class="card">
-<h2>🏭 Dunkin como caso de estudio</h2>
+<h2>🏭 Dunkin’ Donuts como caso de estudio</h2>
 <p>
-Dunkin utiliza franquicias para expandirse, permitiendo analizar cómo una empresa equilibra control y eficiencia en la práctica.
+Dunkin es una empresa global que opera principalmente bajo un modelo de franquicias.
+Este modelo permite analizar cómo las empresas equilibran eficiencia y control.
 </p>
 </div>
 
 <div class="card">
 <h2>🔍 Naturaleza de la empresa</h2>
 <p>
-Dunkin coordina internamente marca, calidad y estándares, reduciendo incertidumbre frente al mercado.
+Dunkin no deja todas las decisiones al mercado, sino que centraliza marca, calidad y estándares,
+reduciendo incertidumbre y asegurando homogeneidad.
 </p>
 </div>
 
@@ -121,53 +118,53 @@ Los contratos de franquicia reducen costos de búsqueda y negociación, pero gen
 <div class="card">
 <h2>🔗 Integración vertical</h2>
 <p>
-Dunkin presenta integración parcial: controla lo estratégico, delega la operación.
+Dunkin presenta integración parcial: controla lo estratégico pero delega la operación,
+equilibrando control y eficiencia.
 </p>
 </div>
 
 <div class="card">
 <h2>📏 Tamaño de la empresa</h2>
 <p>
-El modelo de franquicias permite crecimiento sin aumentar burocracia.
+El modelo de franquicias permite crecer sin aumentar significativamente los costos internos,
+evitando burocracia.
 </p>
 </div>
 
 <div class="card">
 <h2>⚠️ Problema de agencia</h2>
 <p>
-Se controla mediante contratos y supervisión para evitar comportamientos oportunistas.
+Los franquiciados pueden tener incentivos distintos a la empresa.
+Dunkin lo controla mediante contratos, supervisión y estándares.
 </p>
 </div>
 
 <div class="card interactive">
-<h2>⚖️ Visualización Interactiva del Punto Óptimo</h2>
+<h2>⚖️ Punto Óptimo de Integración</h2>
 
 <input type="range" min="0" max="100" value="50" id="slider" oninput="updateChart()">
 
 <canvas id="grafico"></canvas>
 
 <p id="texto"></p>
-
 </div>
 
 </section>
 
 <script>
 
-// Animación de entrada
+// Animación scroll
 const cards = document.querySelectorAll('.card');
-
 window.addEventListener('scroll', ()=>{
     cards.forEach(card=>{
-        const top = card.getBoundingClientRect().top;
-        if(top < window.innerHeight - 100){
+        if(card.getBoundingClientRect().top < window.innerHeight - 100){
             card.classList.add('show');
         }
     });
 });
 
-// Mostrar más
-function mostrarMas(id){
+// Toggle texto
+function toggle(id){
     const el = document.getElementById(id);
     el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
@@ -176,23 +173,16 @@ function mostrarMas(id){
 
 const ctx = document.getElementById('grafico');
 
-let chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: Array.from({length: 101}, (_, i) => i),
-        datasets: [
+let chart = new Chart(ctx,{
+    type:'line',
+    data:{
+        labels:Array.from({length:101},(_,i)=>i),
+        datasets:[
             {label:'Costos de Mercado',data:[],tension:0.4},
             {label:'Costos Internos',data:[],tension:0.4},
-            {label:'Punto Óptimo',data:[],type:'scatter',pointRadius:6},
+            {label:'Óptimo',data:[],type:'scatter',pointRadius:6},
             {label:'Equilibrio',data:[],borderDash:[5,5]}
         ]
-    },
-    options:{
-        responsive:true,
-        scales:{
-            x:{title:{display:true,text:'Nivel de integración'}},
-            y:{title:{display:true,text:'Costo'}}
-        }
     }
 });
 
@@ -230,13 +220,13 @@ function updateChart(){
     chart.update();
 
     if(val<35){
-        txt.innerText="Predominio del mercado → menor control.";
+        txt.innerText="Predominio del mercado.";
     }
     else if(val<=70){
-        txt.innerText="Punto óptimo → Dunkin equilibra eficiencia y control.";
+        txt.innerText="Punto óptimo: equilibrio eficiente.";
     }
     else{
-        txt.innerText="Alta integración → mayor control pero mayores costos.";
+        txt.innerText="Alta integración: mayor control pero más costos.";
     }
 }
 
