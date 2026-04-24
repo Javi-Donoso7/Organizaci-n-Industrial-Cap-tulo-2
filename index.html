@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Dunkin - Organización Industrial</title>
+<title>Dunkin Donuts - Organización Industrial</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -26,7 +27,7 @@ section{
 
 .card{
     background:white;
-    padding:15px;
+    padding:20px;
     margin:15px 0;
     border-radius:10px;
 }
@@ -49,49 +50,66 @@ canvas{
 <body>
 
 <header>
-<h1>Dunkin’ Donuts</h1>
-<p>Organización Industrial - Naturaleza y Tamaño de la Empresa</p>
+<h1>Dunkin Donuts</h1>
+<p>Naturaleza y Tamaño de la Empresa</p>
 </header>
 
 <section>
 
 <div class="card">
-<h2>1. Naturaleza de la empresa</h2>
-<p>La empresa existe para reducir los costos de transacción del mercado. Dunkin’ coordina internamente procesos clave como marca, calidad y proveedores, evitando costos de búsqueda, negociación y control.</p>
+<h2>Dimensión Teórica</h2>
+<p>
+La empresa existe como sustituto del mercado, reduciendo los costos de transacción asociados a la búsqueda, negociación y supervisión. 
+Dunkin utiliza estandarización, control de calidad y contratos para coordinar su funcionamiento.
+</p>
 </div>
 
 <div class="card">
-<h2>2. Costos de transacción</h2>
-<p>Son los costos de usar el mercado. Dunkin los reduce mediante contratos de franquicia, estandarización y control de proveedores.</p>
+<h2>Costos de Transacción</h2>
+<p>
+Incluyen costos de búsqueda, negociación y control. Dunkin reduce estos costos mediante contratos de franquicia y proveedores definidos.
+</p>
 </div>
 
 <div class="card">
-<h2>3. Integración vertical</h2>
-<p>Dunkin presenta una integración parcial: no produce todo internamente, pero controla estándares y procesos clave mediante contratos.</p>
+<h2>Integración Vertical</h2>
+<p>
+Dunkin presenta una integración parcial, ya que no produce todo internamente, pero controla estándares clave mediante contratos.
+</p>
 </div>
 
 <div class="card">
-<h2>4. Tamaño de la empresa</h2>
-<p>La empresa crece hasta que los costos internos se igualan a los costos de mercado. Dunkin logra gran tamaño global gracias a su modelo de franquicias.</p>
+<h2>Tamaño de la Empresa</h2>
+<p>
+El tamaño óptimo se alcanza cuando los costos internos se igualan a los costos del mercado. Dunkin crece mediante franquicias.
+</p>
 </div>
 
 <div class="card">
-<h2>5. Problema de agencia</h2>
-<p>Existe separación entre dueño y operador (franquiciado). Dunkin lo controla mediante contratos, supervisión y estándares.</p>
+<h2>Problema de Agencia</h2>
+<p>
+Existe separación entre propietario y operador. Dunkin lo gestiona con supervisión y estándares estrictos.
+</p>
 </div>
 
 <div class="card">
-<h2>6. Aplicación: Modelo Dunkin</h2>
-<p>Dunkin utiliza franquicias para equilibrar control y eficiencia, permitiendo expansión rápida con menor inversión directa.</p>
+<h2>Modelo de Negocio</h2>
+<p>
+Dunkin utiliza franquicias para expandirse rápidamente, reduciendo inversión directa y manteniendo control mediante contratos.
+</p>
 </div>
 
 <div class="card">
-<h2>7. Punto óptimo</h2>
-<p>El nivel óptimo ocurre cuando los costos de mercado se igualan a los costos internos. Dunkin se posiciona en un modelo híbrido entre mercado e integración.</p>
+<h2>Análisis del Punto Óptimo</h2>
+<p>
+El punto óptimo ocurre cuando los costos internos y los costos de mercado se igualan. Dunkin opera en un modelo híbrido eficiente.
+</p>
 </div>
+
+<!-- 🔥 NUEVA SECCIÓN INTERACTIVA -->
 
 <div class="card interactive">
-<h2>8. Visualización Interactiva del Punto Óptimo</h2>
+<h2>Visualización Interactiva del Punto Óptimo</h2>
 
 <input type="range" min="0" max="100" value="50" id="slider" oninput="updateChart()">
 
@@ -163,10 +181,10 @@ function updateChart(){
         txt.innerText="Predominio del mercado: menor control.";
     }
     else if(val<=70){
-        txt.innerText="Punto óptimo: modelo Dunkin (franquicias).";
+        txt.innerText="Punto óptimo: modelo Dunkin.";
     }
     else{
-        txt.innerText="Alta integración: mayor control pero más costos.";
+        txt.innerText="Alta integración: mayor control pero mayor costo.";
     }
 }
 
