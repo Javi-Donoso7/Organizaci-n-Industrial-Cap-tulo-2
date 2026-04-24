@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Dunkin - Punto Óptimo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{font-family:Arial;margin:0;background:#f5f5f5;}
+header{background:#ff6a00;color:white;padding:20px;text-align:center;}
+section{padding:20px;}
+.card{background:white;padding:15px;margin:10px 0;border-radius:10px;}
+.interactive{text-align:center;}
+canvas{max-width:700px;margin:auto;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Dunkin’ Donuts</h1>
+<p>Visualización del Punto Óptimo</p>
+</header>
+
+<section>
+
+<div class="card">
+<h2>Modelo Económico</h2>
+<p>Equilibrio entre costos de mercado y costos internos.</p>
+</div>
+
+<div class="card interactive">
+<h2>Gráfico Interactivo</h2>
+
+<input type="range" min="0" max="100" value="50" id="slider" oninput="updateChart()">
+
+<canvas id="grafico"></canvas>
+
+<p id="texto"></p>
+
+</div>
+
+</section>
+
+<script>
+
+const ctx = document.getElementById('grafico');
+
+let chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: Array.from({length: 101}, (_, i) => i),
+        datasets: [
+            {label:'Costos de Mercado',data:[],tension:0.4},
+            {label:'Costos de Empresa',data:[],tension:0.4},
+            {label:'Punto Óptimo',data:[],type:'scatter',pointRadius:6},
+            {label:'Línea Óptima',data:[],borderDash:[5,5]}
+        ]
+    },
+    options:{
+        responsive:true,
+        scales:{
+            x:{title:{display:true,text:'Nivel de integración'}},
+            y:{title:{display:true,text:'Costo'}}
+        }
+    }
+});
+
+function generarDatos(v){
+    let m=[],e=[];
+    for(let i=0;i<=100;i++){
+        m.push(100-i+(v/10));
+        e.push(i+(v/10));
+    }
+    return {m,e};
+}
+
+function interseccion(m,e){
+    for(let i=0;i<m.length;i++){
+        if(Math.abs(m[i]-e[i])<2){
+            return {x:i,y:m[i]};
+        }
+    }
+    return {x:50,y:50};
+}
+
+function updateChart(){
+    const val=document.getElementById('slider').value;
+    const txt=document.getElementById('texto');
+
+    let d=generarDatos(val);
+    let p=interseccion(d.m,d.e);
+
+    chart.data.datasets[0].data=d.m;
+    chart.data.datasets[1].data=d.e;
+    chart.data.datasets[2].data=[{x:p.x,y:p.y}];
+    chart.data.datasets[3].data=[{x:p.x,y:0},{x:p.x,y:100}];
+
+    chart.update();
+
+    if(val<35){txt.innerText="Mayor uso del mercado";}
+    else if(val<=70){txt.innerText="Punto óptimo (Dunkin)";}
+    else{txt.innerText="Mayor integración interna";}
+}
+
+updateChart();
+
+</script>
+
+</body>
+</html>
