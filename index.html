@@ -2,114 +2,145 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Dunkin Donuts - Organización Industrial</title>
+<title>Dunkin - Organización Industrial</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+
 body{
-    font-family: Arial;
+    font-family: 'Arial';
     margin:0;
-    background:#f5f5f5;
+    background: linear-gradient(135deg,#ff6a00,#ff0080);
+    color:#333;
 }
 
 header{
-    background:#ff6a00;
-    color:white;
-    padding:20px;
     text-align:center;
+    padding:40px;
+    color:white;
+}
+
+h1{
+    font-size:40px;
 }
 
 section{
+    max-width:1000px;
+    margin:auto;
     padding:20px;
 }
 
 .card{
     background:white;
-    padding:20px;
-    margin:15px 0;
-    border-radius:10px;
+    padding:25px;
+    margin:20px 0;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    transform: translateY(30px);
+    opacity:0;
+    transition: all 0.6s ease;
+}
+
+.card.show{
+    transform: translateY(0);
+    opacity:1;
 }
 
 h2{
     color:#ff6a00;
 }
 
+h3{
+    color:#ff0080;
+}
+
 .interactive{
     text-align:center;
 }
 
+button{
+    background:#ff0080;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
 canvas{
     max-width:700px;
-    margin:auto;
+    margin:20px auto;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Dunkin Donuts</h1>
-<p>Naturaleza y Tamaño de la Empresa</p>
+<h1>Dunkin’ Donuts</h1>
+<p>Organización Industrial - Capítulo 2</p>
 </header>
 
 <section>
 
 <div class="card">
-<h2>Dimensión Teórica</h2>
+<h2>🧠 Análisis del Capítulo 2</h2>
 <p>
-La empresa existe como sustituto del mercado, reduciendo los costos de transacción asociados a la búsqueda, negociación y supervisión. 
-Dunkin utiliza estandarización, control de calidad y contratos para coordinar su funcionamiento.
+La empresa surge como respuesta a los costos de transacción del mercado. Cuando estos costos son altos, es más eficiente coordinar internamente. Sin embargo, la coordinación también genera costos, por lo que la empresa enfrenta un trade-off constante entre mercado e integración.
+</p>
+<button onclick="mostrarMas('teoria')">Ver más</button>
+<p id="teoria" style="display:none;">
+El tamaño de la empresa se define cuando los costos internos se igualan a los del mercado, estableciendo su límite eficiente.
 </p>
 </div>
 
 <div class="card">
-<h2>Costos de Transacción</h2>
+<h2>🏭 Dunkin como caso de estudio</h2>
 <p>
-Incluyen costos de búsqueda, negociación y control. Dunkin reduce estos costos mediante contratos de franquicia y proveedores definidos.
+Dunkin utiliza franquicias para expandirse, permitiendo analizar cómo una empresa equilibra control y eficiencia en la práctica.
 </p>
 </div>
 
 <div class="card">
-<h2>Integración Vertical</h2>
+<h2>🔍 Naturaleza de la empresa</h2>
 <p>
-Dunkin presenta una integración parcial, ya que no produce todo internamente, pero controla estándares clave mediante contratos.
+Dunkin coordina internamente marca, calidad y estándares, reduciendo incertidumbre frente al mercado.
 </p>
 </div>
 
 <div class="card">
-<h2>Tamaño de la Empresa</h2>
+<h2>📉 Costos de transacción</h2>
 <p>
-El tamaño óptimo se alcanza cuando los costos internos se igualan a los costos del mercado. Dunkin crece mediante franquicias.
+Los contratos de franquicia reducen costos de búsqueda y negociación, pero generan costos de supervisión.
 </p>
 </div>
 
 <div class="card">
-<h2>Problema de Agencia</h2>
+<h2>🔗 Integración vertical</h2>
 <p>
-Existe separación entre propietario y operador. Dunkin lo gestiona con supervisión y estándares estrictos.
+Dunkin presenta integración parcial: controla lo estratégico, delega la operación.
 </p>
 </div>
 
 <div class="card">
-<h2>Modelo de Negocio</h2>
+<h2>📏 Tamaño de la empresa</h2>
 <p>
-Dunkin utiliza franquicias para expandirse rápidamente, reduciendo inversión directa y manteniendo control mediante contratos.
+El modelo de franquicias permite crecimiento sin aumentar burocracia.
 </p>
 </div>
 
 <div class="card">
-<h2>Análisis del Punto Óptimo</h2>
+<h2>⚠️ Problema de agencia</h2>
 <p>
-El punto óptimo ocurre cuando los costos internos y los costos de mercado se igualan. Dunkin opera en un modelo híbrido eficiente.
+Se controla mediante contratos y supervisión para evitar comportamientos oportunistas.
 </p>
 </div>
-
-<!-- 🔥 NUEVA SECCIÓN INTERACTIVA -->
 
 <div class="card interactive">
-<h2>Visualización Interactiva del Punto Óptimo</h2>
+<h2>⚖️ Visualización Interactiva del Punto Óptimo</h2>
 
 <input type="range" min="0" max="100" value="50" id="slider" oninput="updateChart()">
 
@@ -123,6 +154,26 @@ El punto óptimo ocurre cuando los costos internos y los costos de mercado se ig
 
 <script>
 
+// Animación de entrada
+const cards = document.querySelectorAll('.card');
+
+window.addEventListener('scroll', ()=>{
+    cards.forEach(card=>{
+        const top = card.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+            card.classList.add('show');
+        }
+    });
+});
+
+// Mostrar más
+function mostrarMas(id){
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+// Gráfico
+
 const ctx = document.getElementById('grafico');
 
 let chart = new Chart(ctx, {
@@ -131,9 +182,9 @@ let chart = new Chart(ctx, {
         labels: Array.from({length: 101}, (_, i) => i),
         datasets: [
             {label:'Costos de Mercado',data:[],tension:0.4},
-            {label:'Costos de Empresa',data:[],tension:0.4},
+            {label:'Costos Internos',data:[],tension:0.4},
             {label:'Punto Óptimo',data:[],type:'scatter',pointRadius:6},
-            {label:'Línea Óptima',data:[],borderDash:[5,5]}
+            {label:'Equilibrio',data:[],borderDash:[5,5]}
         ]
     },
     options:{
@@ -164,6 +215,7 @@ function interseccion(m,e){
 }
 
 function updateChart(){
+
     const val=document.getElementById('slider').value;
     const txt=document.getElementById('texto');
 
@@ -178,13 +230,13 @@ function updateChart(){
     chart.update();
 
     if(val<35){
-        txt.innerText="Predominio del mercado: menor control.";
+        txt.innerText="Predominio del mercado → menor control.";
     }
     else if(val<=70){
-        txt.innerText="Punto óptimo: modelo Dunkin.";
+        txt.innerText="Punto óptimo → Dunkin equilibra eficiencia y control.";
     }
     else{
-        txt.innerText="Alta integración: mayor control pero mayor costo.";
+        txt.innerText="Alta integración → mayor control pero mayores costos.";
     }
 }
 
